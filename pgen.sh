@@ -3,7 +3,7 @@
 #Create variable of the first 150 bytes of /dev/urandom output
 randomness=$(cat /dev/urandom | head -c 150)
 
-#Create variable of temperature anisotropies of the Cosmic Microwave Background from NASA's website
+#Create variable using temperature anisotropies of the Cosmic Microwave Background from NASA's website
 background=$(curl https://lambda.gsfc.nasa.gov/data/suborbital/ACT/act_v2/TotalSpectra/spectrum_ACTEplusS_148x148.dat)
 
 #Calculate the first 1000 digits of Pi
