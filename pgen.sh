@@ -50,7 +50,7 @@ echo -e "\n"
 echo "The following is your new password:"
 
 #Take first 25 bytes of the final checksum, reverse it, and encode with a Caesar Cipher corresponding to the alphabet backwards and all capitalized. Print to terminal as new password.
-echo "$(less tmp4.txt | head -c 25 | rev | tr abcdefghijklmnopqrstuvwxyz ZYXWVUTSRQPONMLKJIHGFEDCBA)"
+echo "$(less tmp4.txt | head -c 25 | rev | tr abcdefghijklmnopqrstuvwxyz ZyXwVuTsRqPoNmLkJiHgFeDcBa)"
 
 #Cleanup all the temp files we fucked around with
 rm tmp.txt
