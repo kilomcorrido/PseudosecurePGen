@@ -3,6 +3,8 @@
 
 A pointlessly convoluted script to generate a password based on sha512 checksums and Caesar Ciphers. This makes you feel secure without making you actually secure.
 
+There is literally no good reason to generate a password this way.
+
 How it works:
 
 1) Take the first 150 bytes of /dev/urandom
