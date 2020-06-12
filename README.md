@@ -3,7 +3,7 @@
 
 A pointlessly convoluted script to generate a password based on sha512 checksums and Caesar Ciphers. This makes you feel secure without making you actually secure.
 
-There is literally no good reason to generate a password this way.
+There is literally no good reason to generate a password this way. It doesn't give you any extra entropy and doesn't even include symbols, although the latter may come in an update next time I get bored at work.
 
 How it works:
 
