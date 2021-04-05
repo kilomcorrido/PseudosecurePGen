@@ -1,7 +1,7 @@
 # PseudosecurePGen
 "Just because you can, doesn't mean you should."
 
-A pointlessly convoluted script to generate a password based on sha512 checksums and Caesar Ciphers. This makes you feel secure without making you actually secure.
+A pointlessly convoluted script to generate a password based on sha512 checksums and substitution ciphers. This makes you feel secure without making you actually secure.
 
 There is literally no good reason to generate a password this way. It doesn't give you any extra entropy and doesn't even include symbols, although the latter may come in an update next time I get bored at work.
 
@@ -25,6 +25,6 @@ How it works:
 
 8) Create a checksum of that file
 
-9) Take the first 25 bytes of that checksum, reverse them, replace the letters in it with a Caesar Cipher of 30 random characters, base64 encode that, then Caesar it with the user-provided salt
+9) Take the first 25 bytes of that checksum, reverse them, replace the letters in it with a cipher of 30 random characters, base64 encode that, then cipher it again with the user-provided salt
 
 10) You now have your password
