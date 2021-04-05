@@ -7,6 +7,8 @@ There is literally no good reason to generate a password this way. It doesn't gi
 
 How it works:
 
+1a) Ask for the user to enter the salt they'd like to use
+
 1) Take the first 150 bytes of /dev/urandom
 
 2) Take the temperature anisotropies of the Cosmic Microwave Background from NASA's website
@@ -23,6 +25,6 @@ How it works:
 
 8) Create a checksum of that file
 
-9) Take the first 25 bytes of that checksum, reverse them, replace the letters in it with a Caesar Cipher of the alphabet in reverse, with every other letter capitalized
+9) Take the first 25 bytes of that checksum, reverse them, replace the letters in it with a Caesar Cipher of 30 random characters, base64 encode that, then Caesar it with the user-provided salt
 
 10) You now have your password
