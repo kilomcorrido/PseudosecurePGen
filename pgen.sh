@@ -1,40 +1,32 @@
+## A pointlessly convoluted script to generate a password based on sha512 checksums and substitution ciphers. 
+## Makes you feel secure without making you actually secure! Which I think we all agree is the best kind of security.
+
 #!/bin/bash
 
-#Enter your salt
-read -p "Enter a random string to be your salt. Be sure to get real freaky with it! $(echo "")" salt
+read -p "Enter a random string to be your salt $(echo "")" salt
 
-#Take first 150 bytes of /dev/urandom output
 randomness=$(cat /dev/urandom | head -c 150)
-#Take most recent temperature anisotropies of the cosmic microwave background from NASA website, append to same file
-background=$(curl https://lambda.gsfc.nasa.gov/data/suborbital/ACT/act_v2/TotalSpectra/spectrum_ACTEplusS_148x148.dat)
-#Take first 1000 digits of pi
+background=$(curl -s https://lambda.gsfc.nasa.gov/data/suborbital/ACT/act_v2/TotalSpectra/spectrum_ACTEplusS_148x148.dat)
 pi=$(echo "scale=1000; 4*a(1)" | bc -l)
 
-#Calculate sha512 checksum of all those things concatenated into tmp.txt
 function passw0rd {
-        echo $randomness > tmp.txt
-        echo $background >> tmp.txt
-        echo $pi >> tmp.txt
-        echo "$(sha512sum tmp.txt)" > firstsum.txt
+echo $randomness > tmp.txt
+echo $background >> tmp.txt
+echo $pi >> tmp.txt
+echo "$(sha512sum tmp.txt)" > firstsum.txt
 }
 
-#Calculate another sha512 checksum of same
 function passw2rd {
-        echo $randomness > tmp2.txt
-        echo $background >> tmp2.txt
-        echo $pi >> tmp2.txt
-        echo "$(sha512sum tmp2.txt)" > secondsum.txt
+echo $randomness > tmp2.txt
+echo $background >> tmp2.txt
+echo $pi >> tmp2.txt
+echo "$(sha512sum tmp2.txt)" > secondsum.txt
 }
 
-#Function calls
 passw0rd
 passw2rd
-
-#Concatenate the two checksums and echo to a file
 cat firstsum.txt >> secondsum.txt
-echo "$(sha512sum secondsum.txt)" > tmp4.txt   
-
-#Make the script look like its doing something, for that USER EXPERIENCE (TM)
+echo "$(sha512sum secondsum.txt)" > tmp4.txt 
 echo ""
 echo -ne "."
 sleep 1
@@ -47,9 +39,7 @@ sleep 1
 echo -ne "."
 echo -e "\n"
 echo "The following is your new password:"
-
-#Here's where the magic happens: Encode with a Caesar cipher corresponding to 30 random characters taken from openssl. Base64 encode that. Then re-Caesar it with your salt.
-echo "$(less tmp4.txt | head -c 25 | rev | tr abcdefghijklmnopqrstuvwxyz $(openssl rand 30| base64) | tr abcdefghijklmnopqrstuvwxyz $salt)"
+echo "$(less tmp4.txt | head -c 25 | rev | tr abcdefghijklmnopqrstuvwxyz $(openssl rand 30| base64) | tr abcdefghijklmnopqrstuvwxyz $salt | tr -dc "A-Za-z0-9^\!@%'\"#$^" </dev/urandom | head -c 25)"
 
 rm tmp.txt
 rm tmp2.txt
