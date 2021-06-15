@@ -27,17 +27,17 @@ passw0rd
 passw2rd
 cat firstsum.txt >> secondsum.txt
 echo "$(sha512sum secondsum.txt)" > tmp4.txt 
-echo ""
-echo -ne "."
-sleep 1
-echo -ne "."
-sleep 0.7
-echo -ne "."
-sleep 0.5
-echo -ne "."
-sleep 1
-echo -ne "."
-echo -e "\n"
+for ((k = 0; k <= 10 ; k++))
+do
+    echo -n "[ "
+    for ((i = 0 ; i <= k; i++)); do echo -n "###"; done
+    for ((j = i ; j <= 10 ; j++)); do echo -n "   "; done
+    v=$((k * 10))
+    echo -n " ] "
+    echo -n "$v %" $'\r'
+    sleep 0.05
+done
+echo
 echo "The following is your new password:"
 echo "$(less tmp4.txt | head -c 25 | rev | tr abcdefghijklmnopqrstuvwxyz $(openssl rand 30| base64) | tr abcdefghijklmnopqrstuvwxyz $salt | tr -dc "A-Za-z0-9^\!@%'\"#$^" </dev/urandom | head -c 25)"
 
