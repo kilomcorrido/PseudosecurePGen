@@ -23,6 +23,7 @@ echo $pi >> tmp2.txt
 echo "$(sha512sum tmp2.txt)" > secondsum.txt
 }
 
+echo "Constructing your new password..."
 passw0rd
 passw2rd
 cat firstsum.txt >> secondsum.txt
